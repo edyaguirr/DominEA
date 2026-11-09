@@ -76,8 +76,8 @@
 
 <script>
 // ===================== CONSTANTS & STATE =====================
-const NAMES = ['You', 'East', 'North', 'West'];        // seat 0 bottom, 1 right, 2 top, 3 left (play goes counter-clockwise)
-const TEAM_NAMES = ['You & North', 'East & West'];      // team = seat % 2
+const NAMES = ['You', 'Charlie', 'Alpha', 'Beta'];        // seat 0 bottom, 1 right, 2 top, 3 left (play goes counter-clockwise)
+const TEAM_NAMES = ['You & Alpha', 'Charlie & Beta'];      // team = seat % 2
 const TARGET = 100;
 const BOT_DELAY = 1000;    // ms a bot "thinks" before it plays or passes
 const ANIM_MS = 400;       // ms for a played tile to slide onto the board
@@ -344,8 +344,8 @@ function endHand(kind, p) {
   if (scores[0] >= TARGET || scores[1] >= TARGET) {
     phase = 'matchover';
     html += scores[0] >= TARGET
-      ? '<h2>🎉 You and North win the match!</h2>'
-      : '<h2>East & West win the match.</h2>';
+      ? '<h2>🎉 You and Alpha win the match!</h2>'
+      : '<h2>Charlie & Beta win the match.</h2>';
     html += '<button onclick="newMatch()">New match</button>';
   } else {
     html += `<p>${NAMES[nextLeader] === 'You' ? 'You lead' : NAMES[nextLeader] + ' leads'} the next hand.</p>`;
@@ -607,9 +607,9 @@ function render() {
   const active = q => phase === 'play' && turn === q;
 
   if (compact) {
-    // West | North | East across the top, in seating order
+    // Beta | Alpha | Charlie across the top, in seating order
     const colW = W / 3;
-    [[3, 'West'], [2, 'North (partner)'], [1, 'East']].forEach(([q, name], k) => {
+    [[3, 'Beta'], [2, 'Alpha (partner)'], [1, 'Charlie']].forEach(([q, name], k) => {
       const cx = colW * k + colW / 2;
       drawLabel(name, lastAct[q], cx, 16, active(q), true);
       const n = hands[q].length;
@@ -618,12 +618,12 @@ function render() {
       for (let i = 0; i < n; i++) { const t = hands[q][i]; drawTile(x0 + i * (tw + g), 38, tw, th, t[0], t[1], { back: !revealed }); }
     });
   } else {
-    // North (partner) – top
+    // Alpha (partner) – top
     const n = hands[2].length, tw = revealed ? 22 : 18, th = tw * 2, gap = 4;
     const total = n * (tw + gap) - gap, x0 = W / 2 - total / 2;
     for (let i = 0; i < n; i++) { const t = hands[2][i]; drawTile(x0 + i * (tw + gap), 44, tw, th, t[0], t[1], { back: !revealed }); }
-    drawLabel('North — partner', lastAct[2], W / 2, 20, active(2));
-    // East – right, West – left (tiles horizontal, stacked)
+    drawLabel('Alpha — partner', lastAct[2], W / 2, 20, active(2));
+    // Charlie – right, Beta – left (tiles horizontal, stacked)
     for (const [q, cx] of [[1, W - sideW / 2], [3, sideW / 2]]) {
       const n = hands[q].length, th = revealed ? 22 : 18, tw = th * 2, gap = 4;
       const total = n * (th + gap) - gap, y0 = topH + (H - topH - handH) / 2 - total / 2 + 10;
@@ -675,9 +675,9 @@ function hideOverlay() {
 const RULES_HTML = `
   <ul>
     <li>Double-six set: 28 tiles, each of the 4 players gets 7. No boneyard.</li>
-    <li>You and <b>North</b> (across from you) are partners against <b>East</b> and <b>West</b>.</li>
+    <li>You and <b>Alpha</b> (across from you) are partners against <b>Charlie</b> and <b>Beta</b>.</li>
     <li>First hand: whoever holds the <b>6|6</b> must open with it. After that, the winner of the previous hand leads with any tile.</li>
-    <li>Play goes counter-clockwise (You → East → North → West). Match a number on either open end. If you can play, you must; otherwise you pass.</li>
+    <li>Play goes counter-clockwise (You → Charlie → Alpha → Beta). Match a number on either open end. If you can play, you must; otherwise you pass.</li>
     <li><b>Domino:</b> the player who plays their last tile wins the hand. Their team scores the pips left in <i>all</i> hands.</li>
     <li><b>Blocked (tranque):</b> if no one can play, the team with fewer pips left scores all the pips. A tie scores nothing.</li>
     <li>First team to <b>${TARGET}</b> points wins the match.</li>
