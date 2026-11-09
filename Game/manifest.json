@@ -1,6 +1,6 @@
 {
-  "name": "Dominoes — 4-Player Partners",
-  "short_name": "Dominoes",
+  "name": "DominEA — 4-Player Partners",
+  "short_name": "DominEA",
   "description": "Block-style partner dominoes: you and North against two bots.",
   "start_url": "./DominEA.html",
   "scope": "./",
