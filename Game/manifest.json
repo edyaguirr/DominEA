@@ -1,0 +1,17 @@
+{
+  "name": "Dominoes — 4-Player Partners",
+  "short_name": "Dominoes",
+  "description": "Block-style partner dominoes: you and North against two bots.",
+  "start_url": "./DominEA.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b3d20",
+  "theme_color": "#062814",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
